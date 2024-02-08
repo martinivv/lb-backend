@@ -16,7 +16,7 @@ const APP: Express = express()
 // ======= Configuration =======
 APP.use(cors())
 
-serverConfig()
+serverConfig(APP)
 connectToDB(DB_URI)
 APP.use(rootRouter)
 // =======
