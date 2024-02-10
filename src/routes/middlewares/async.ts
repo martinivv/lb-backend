@@ -1,15 +1,12 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
+import { I_InputFunction } from '../../_compatibility/types/globals'
 
-interface InputFunction {
-  (req: Request, res: Response, next?: NextFunction): Promise<void> | void
-}
-
-export default function (handler: InputFunction) {
-  return async (req: Request, res: Response, next: NextFunction) => {
+export default function (handler: I_InputFunction) {
+  return async (req: Request, res: Response) => {
     try {
-      await handler(req, res, next)
+      await handler(req, res)
     } catch (e) {
-      next(e)
+      console.error(e)
     }
   }
 }

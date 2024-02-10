@@ -1,24 +1,27 @@
 import cors from 'cors'
 import { config as dotenvConfig } from 'dotenv'
 import express, { Express } from 'express'
-import serverConfig from './onLaunch/config'
-import connectToDB from './onLaunch/db'
-import rootRouter from './onLaunch/routes'
+import validateEnv from '../_compatibility/validateEnv'
+import apiEndpointsConfig from './config/apiEndpoints'
+import dbConfig from './config/db'
+import serverConfig from './config/server'
 
 dotenvConfig()
-const PORT = process.env.PORT || 8080
-const DB_URI = process.env.DB_URI as string
+// Especially important if we're dealing with logic-related variables
+validateEnv()
+
+const PORT = process.env.PORT!
 
 /* ========================================== APP ========================================== */
 
 const APP: Express = express()
 
-// ======= Configuration =======
+// ================= CONFIGS =================
 APP.use(cors())
 
-serverConfig(APP)
-connectToDB(DB_URI)
-APP.use(rootRouter)
-// =======
+serverConfig()
+dbConfig()
+APP.use(apiEndpointsConfig(APP))
+// ==========================
 
-APP.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))
+APP.listen(PORT, () => console.log(`\n>>> Server is running on port ${PORT}...\n${Array(50).join('=')}\n`))

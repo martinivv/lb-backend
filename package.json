@@ -1,6 +1,6 @@
 {
   "name": "lend-borrow-eip2535__backend",
-  "description": "",
+  "description": "A backend service on Docker",
   "author": "Martin Ivanov Ivanov, <martinivv2@gmail.com>",
   "version": "1.0.0",
   "license": "MIT",
