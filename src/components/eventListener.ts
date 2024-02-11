@@ -23,9 +23,7 @@ const filter = {
 /* ================================================ METHODS =============================================== */
 
 export const initListeners = async function () {
-  const lastProcessedBlockInDb = await getLastProcessedBlock()
-  const currentBlock = await joystick.provider.getBlockNumber()
-  if (currentBlock > lastProcessedBlockInDb! + 1) await _syncDb(lastProcessedBlockInDb!, currentBlock)
+  _checkSync()
 
   joystick.provider.on(filter, async (event: any) => {
     const currentBlock = await joystick.provider.getBlockNumber()
@@ -45,6 +43,12 @@ export const initListeners = async function () {
 }
 
 /* ================================================ MODULE'S METHODS =============================================== */
+
+const _checkSync = async function () {
+  const lastProcessedBlockInDb = await getLastProcessedBlock()
+  const currentBlock = await joystick.provider.getBlockNumber()
+  if (currentBlock > lastProcessedBlockInDb! + 1) await _syncDb(lastProcessedBlockInDb!, currentBlock)
+}
 
 const _syncDb = async function (lastProcessedBlockInDb: number, currentBlock: number) {
   const logs = await joystick.provider.getLogs({
