@@ -8,10 +8,11 @@ This service acts as an event listener for the [Lending and Borrowing Protocol](
 - Processes events;
 - Manages DB states;
 - Synchronizes DB;
-- Provides REST APIs.
+- RESTful API;
+- Supports all CRUD operations;
 
 ## Quick Start
 
-1. **`cp .env.template .env`**, then fill out the `.env` file;
-2. **`npm i`**
-3. **`npm run dev`**
+1. Run **`yarn hardhat node`** in the [LB protocol's](https://github.com/martinivv/lend-borrow-eip2535) directory
+2. Run **`docker-compose up`** in the current's directory
+3. Try opening `localhost:8080` in a browser
