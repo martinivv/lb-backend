@@ -15,4 +15,4 @@ This service acts as an event listener for the [Lending and Borrowing Protocol](
 
 1. Run **`yarn hardhat node`** in the [LB protocol's](https://github.com/martinivv/lend-borrow-eip2535) directory
 2. Run **`docker-compose up`** in the current's directory
-3. Try opening `localhost:8080` in a browser
+3. Try opening **`localhost:8080`** in a browser
